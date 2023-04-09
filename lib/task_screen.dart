@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
+/* глобальные функции очень так себе идея */
 MaterialStateProperty<Color> getColor(Color color, Color colorPressed) {
   getColor(Set<MaterialState> states) {
     if (states.contains(MaterialState.pressed)) {
@@ -28,6 +29,8 @@ class TaskScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
+                // должно было быть appbar'ом и закрепленно вверху экрана при скролле
+                // проверь в прототипе как это должно быть
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -57,6 +60,16 @@ class TaskScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                 child: OutlinedButton(
+                  // OutlinedButton.styleFrom(
+                  /// позволяет не иметь глобальную функцию getColor и передавать тип [Color]
+                  /* 
+                  OutlinedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(35),
+                    side: const BorderSide(color: Colors.blue),
+                    foregroundColor: Colors.blue,
+                    backgroundColor: Colors.white,
+                  ),
+                   */
                   style: ButtonStyle(
                     minimumSize:
                         const MaterialStatePropertyAll(Size.fromHeight(35)),
@@ -71,6 +84,7 @@ class TaskScreen extends StatelessWidget {
               ),
               const Divider(),
               Padding(
+                // могло быть константой и все другие такие же
                 padding: EdgeInsets.only(
                   left: 12.0,
                   right: 12,
@@ -80,10 +94,19 @@ class TaskScreen extends StatelessWidget {
                     Expanded(child: Text('Какой-то текст')),
                     InkWell(
                       onTap: () {},
-                      child: Icon(
-                        FluentIcons.edit_20_regular,
-                        color: Colors.grey,
-                        size: 18,
+                      customBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      // что-то типо такого
+                      child: Container(
+                        height: 32,
+                        width: 32,
+                        alignment: AlignmentDirectional.center,
+                        child: const Icon(
+                          FluentIcons.edit_20_regular,
+                          color: Colors.grey,
+                          size: 20,
+                        ),
                       ),
                     )
                   ],
