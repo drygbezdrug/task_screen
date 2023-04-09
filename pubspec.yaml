@@ -7,6 +7,8 @@ environment:
   sdk: '>=2.19.0 <3.0.0'
 
 dependencies:
+  dotted_border: ^2.0.0+3
+  fluentui_system_icons: ^1.1.198
   flutter:
     sdk: flutter
 
